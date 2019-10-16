@@ -367,7 +367,7 @@ resource "aws_iam_role_policy_attachment" "workers_autoscaling" {
 
 resource "aws_iam_policy" "worker_autoscaling" {
   count       = var.manage_worker_iam_resources && var.manage_worker_autoscaling_policy ? 1 : 0
-  name_prefix = "eks-worker-autoscaling-${aws_eks_cluster.this.name}"
+  name_prefix = "${aws_eks_cluster.this.name}-eks-worker-autoscaling"
   description = "EKS worker node autoscaling policy for cluster ${aws_eks_cluster.this.name}"
   policy      = data.aws_iam_policy_document.worker_autoscaling.json
   path        = var.iam_path
